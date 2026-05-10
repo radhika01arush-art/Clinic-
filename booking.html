@@ -1,0 +1,512 @@
+<html><head><meta charset="utf-8"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+  tailwind.config = {
+    darkMode: "class",
+    theme: {
+      extend: {
+        "colors": {
+                "surface-dim": "#dadada",
+                "on-primary": "#ffffff",
+                "on-tertiary": "#ffffff",
+                "on-error-container": "#93000a",
+                "error": "#ba1a1a",
+                "outline": "#8f6f6f",
+                "tertiary-fixed": "#e4e2e1",
+                "outline-variant": "#e3bebd",
+                "error-container": "#ffdad6",
+                "primary": "#9e0027",
+                "on-surface-variant": "#5b4040",
+                "tertiary-container": "#666565",
+                "on-surface": "#1a1c1c",
+                "surface-bright": "#f9f9f9",
+                "on-tertiary-fixed": "#1b1c1c",
+                "on-primary-container": "#ffdada",
+                "surface-container-high": "#e8e8e8",
+                "on-background": "#1a1c1c",
+                "secondary-fixed": "#e5e2e1",
+                "on-primary-fixed-variant": "#920023",
+                "inverse-on-surface": "#f1f1f1",
+                "inverse-primary": "#ffb3b4",
+                "background": "#f9f9f9",
+                "secondary": "#5f5e5e",
+                "surface-container-low": "#f3f3f3",
+                "primary-fixed-dim": "#ffb3b4",
+                "on-secondary": "#ffffff",
+                "on-tertiary-container": "#e5e3e2",
+                "on-secondary-fixed": "#1c1b1b",
+                "on-secondary-fixed-variant": "#474746",
+                "surface-container-highest": "#e2e2e2",
+                "surface-tint": "#ba1434",
+                "tertiary": "#4d4d4d",
+                "surface-variant": "#e2e2e2",
+                "on-primary-fixed": "#40000a",
+                "inverse-surface": "#2f3131",
+                "surface-container": "#eeeeee",
+                "on-error": "#ffffff",
+                "surface": "#f9f9f9",
+                "on-tertiary-fixed-variant": "#474747",
+                "on-secondary-container": "#636262",
+                "secondary-container": "#e2dfde",
+                "surface-container-lowest": "#ffffff",
+                "secondary-fixed-dim": "#c8c6c5",
+                "tertiary-fixed-dim": "#c8c6c6",
+                "primary-container": "#c41e3a",
+                "primary-fixed": "#ffdad9"
+        },
+        "borderRadius": {
+                "DEFAULT": "0.125rem",
+                "lg": "0.25rem",
+                "xl": "0.5rem",
+                "full": "0.75rem"
+        },
+        "fontFamily": {
+                "headline": ["Inter"],
+                "body": ["Inter"],
+                "label": ["Inter"]
+        }
+      },
+    },
+  }
+</script>
+<style>
+  .material-symbols-outlined {
+    font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+  }
+  .active-step-icon {
+    font-variation-settings: 'FILL' 1;
+  }
+  .glass-nav {
+    backdrop-filter: blur(24px);
+    -webkit-backdrop-filter: blur(24px);
+  }
+  body { scroll-behavior: smooth; }
+  @keyframes fadeSlideIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+  main { animation: fadeSlideIn 0.6s ease-out; }
+</style>
+</head>
+<body class="bg-background text-on-background font-body min-h-screen selection:bg-primary-container selection:text-on-primary-container">
+<script>
+    if (!localStorage.getItem('slv_current_user')) {
+        window.location.replace('index.html');
+    }
+</script>
+<!-- TopAppBar (Suppressed for focused checkout, but using Brand identity) -->
+<header class="fixed top-0 w-full z-50 bg-white/80 backdrop-blur-xl shadow-sm left-0 right-0">
+<div class="w-full bg-yellow-400 text-black text-center py-2 text-xs md:text-sm font-bold uppercase tracking-widest shadow-md">
+    This website here is just for an example
+</div>
+<div class="h-20 px-6 lg:px-12 flex justify-between items-center max-w-[1440px] mx-auto">
+<div class="flex items-center gap-4">
+<a href="home.html" class="text-xl font-bold tracking-tighter text-slate-900">SLV CLINIC</a>
+</div>
+<a href="home.html" class="flex items-center gap-2 text-slate-500 hover:text-slate-900 transition-colors duration-200">
+<span class="material-symbols-outlined">close</span>
+<span class="text-sm font-medium">Exit Booking</span>
+</a>
+</div>
+</header>
+<main class="pt-32 pb-24 px-6 lg:px-12 max-w-[1440px] mx-auto">
+<!-- Progress Indicator -->
+<div class="flex flex-col md:flex-row justify-between items-start md:items-center mb-16 gap-8">
+<div class="space-y-2">
+<h1 class="text-4xl md:text-5xl font-extrabold tracking-tighter leading-tight text-on-background">
+          Reserve Your <br/><span class="text-primary bg-clip-text text-transparent bg-gradient-to-r from-primary to-primary-container">Consultation</span>
+</h1>
+<p class="text-on-surface-variant max-w-md text-lg leading-relaxed">
+          Experience clinical excellence. Select your preferred slot and provide your details to begin your journey.
+        </p>
+</div>
+<nav class="flex items-center gap-1" id="stepIndicator">
+<!-- Step 1 -->
+<div class="step-nav active flex items-center gap-3 px-4 py-3 bg-surface-container-lowest rounded-lg shadow-sm border-b-2 border-primary">
+<span class="material-symbols-outlined text-primary" style="font-variation-settings: 'FILL' 1;">calendar_today</span>
+<span class="text-sm font-bold tracking-widest uppercase text-primary">Schedule</span>
+</div>
+<div class="h-px w-8 bg-surface-container-high mx-2"></div>
+<!-- Step 2 -->
+<div class="step-nav flex items-center gap-3 px-4 py-3 text-on-surface-variant transition-colors">
+<span class="material-symbols-outlined">person</span>
+<span class="text-sm font-bold tracking-widest uppercase">Information</span>
+</div>
+<div class="h-px w-8 bg-surface-container-high mx-2"></div>
+<!-- Step 3 -->
+<div class="step-nav flex items-center gap-3 px-4 py-3 text-on-surface-variant transition-colors">
+<span class="material-symbols-outlined">payments</span>
+<span class="text-sm font-bold tracking-widest uppercase">Confirm</span>
+</div>
+</nav>
+</div>
+<!-- Asymmetric Layout: Step 1 Content -->
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-12" id="step1View">
+<!-- Column 1-7: Selection Area -->
+<section class="lg:col-span-7 space-y-12">
+<!-- Date Selection -->
+<div class="space-y-6">
+<div class="flex items-center justify-between">
+<h2 class="text-2xl font-bold tracking-tight">Select Date</h2>
+<div class="flex gap-2">
+<button class="p-2 hover:bg-surface-container-high rounded-full transition-colors">
+<span class="material-symbols-outlined">chevron_left</span>
+</button>
+<button class="p-2 hover:bg-surface-container-high rounded-full transition-colors">
+<span class="material-symbols-outlined">chevron_right</span>
+</button>
+</div>
+</div>
+<div class="grid grid-cols-7 gap-2">
+<!-- Calendar Days Mock -->
+<div class="text-center py-2 text-[10px] uppercase tracking-widest font-bold text-on-surface-variant">Mon</div>
+<div class="text-center py-2 text-[10px] uppercase tracking-widest font-bold text-on-surface-variant">Tue</div>
+<div class="text-center py-2 text-[10px] uppercase tracking-widest font-bold text-on-surface-variant">Wed</div>
+<div class="text-center py-2 text-[10px] uppercase tracking-widest font-bold text-on-surface-variant">Thu</div>
+<div class="text-center py-2 text-[10px] uppercase tracking-widest font-bold text-on-surface-variant">Fri</div>
+<div class="text-center py-2 text-[10px] uppercase tracking-widest font-bold text-on-surface-variant">Sat</div>
+<div class="text-center py-2 text-[10px] uppercase tracking-widest font-bold text-on-surface-variant">Sun</div>
+<!-- Calendar Grid -->
+<div class="aspect-square flex items-center justify-center bg-surface-container-low text-on-surface-variant/40 rounded-lg">28</div>
+<div class="aspect-square flex items-center justify-center bg-surface-container-low text-on-surface-variant/40 rounded-lg">29</div>
+<div class="aspect-square flex items-center justify-center bg-surface-container-low text-on-surface-variant/40 rounded-lg">30</div>
+<div class="aspect-square flex items-center justify-center bg-surface-container-low text-on-surface-variant/40 rounded-lg">31</div>
+<button class="date-slot aspect-square flex items-center justify-center bg-surface-container-lowest hover:bg-surface-container-high transition-colors font-semibold rounded-lg shadow-sm" data-date="Nov 1, 2026">1</button>
+<button class="date-slot aspect-square flex items-center justify-center bg-surface-container-lowest hover:bg-surface-container-high transition-colors font-semibold rounded-lg shadow-sm" data-date="Nov 2, 2026">2</button>
+<button class="date-slot aspect-square flex items-center justify-center bg-surface-container-lowest hover:bg-surface-container-high transition-colors font-semibold rounded-lg shadow-sm" data-date="Nov 3, 2026">3</button>
+<button class="date-slot aspect-square flex items-center justify-center bg-surface-container-lowest hover:bg-surface-container-high transition-colors font-semibold rounded-lg shadow-sm" data-date="Nov 4, 2026">4</button>
+<button class="date-slot aspect-square flex items-center justify-center bg-primary text-on-primary font-bold rounded-lg shadow-md selected" data-date="Nov 5, 2026">5</button>
+<button class="date-slot aspect-square flex items-center justify-center bg-surface-container-lowest hover:bg-surface-container-high transition-colors font-semibold rounded-lg shadow-sm" data-date="Nov 6, 2026">6</button>
+<button class="date-slot aspect-square flex items-center justify-center bg-surface-container-lowest hover:bg-surface-container-high transition-colors font-semibold rounded-lg shadow-sm" data-date="Nov 7, 2026">7</button>
+<button class="date-slot aspect-square flex items-center justify-center bg-surface-container-lowest hover:bg-surface-container-high transition-colors font-semibold rounded-lg shadow-sm" data-date="Nov 8, 2026">8</button>
+<button class="aspect-square flex items-center justify-center bg-surface-container-low text-on-surface-variant/40 rounded-lg cursor-not-allowed">9</button>
+<button class="aspect-square flex items-center justify-center bg-surface-container-low text-on-surface-variant/40 rounded-lg cursor-not-allowed">10</button>
+</div>
+</div>
+<!-- Time Selection -->
+<div class="space-y-6">
+<h2 class="text-2xl font-bold tracking-tight">Available Times</h2>
+<div class="grid grid-cols-2 md:grid-cols-4 gap-4" id="timeSlots">
+<button class="time-slot py-4 bg-surface-container-lowest hover:bg-surface-container-high transition-all text-sm font-bold tracking-widest uppercase rounded-lg shadow-sm border border-transparent active:scale-[0.98]">09:00 AM</button>
+<button class="time-slot py-4 bg-surface-container-lowest hover:bg-surface-container-high transition-all text-sm font-bold tracking-widest uppercase rounded-lg shadow-sm border border-transparent active:scale-[0.98]">10:30 AM</button>
+<button class="time-slot py-4 bg-primary text-on-primary transition-all text-sm font-bold tracking-widest uppercase rounded-lg shadow-md active:scale-[0.98] selected">01:00 PM</button>
+<button class="time-slot py-4 bg-surface-container-lowest hover:bg-surface-container-high transition-all text-sm font-bold tracking-widest uppercase rounded-lg shadow-sm border border-transparent active:scale-[0.98]">02:30 PM</button>
+<button class="time-slot py-4 bg-surface-container-lowest hover:bg-surface-container-high transition-all text-sm font-bold tracking-widest uppercase rounded-lg shadow-sm border border-transparent active:scale-[0.98]">04:00 PM</button>
+<button class="time-slot py-4 bg-surface-container-lowest hover:bg-surface-container-high transition-all text-sm font-bold tracking-widest uppercase rounded-lg shadow-sm border border-transparent active:scale-[0.98]">05:30 PM</button>
+</div>
+</div>
+</section>
+<!-- Column 8-12: Contextual Sidebar -->
+<aside class="lg:col-span-5">
+<div class="bg-surface-container-lowest p-8 rounded-lg shadow-sm space-y-8 sticky top-32">
+<div class="space-y-4">
+<span class="inline-flex items-center gap-2 px-3 py-1 bg-secondary-container rounded-full">
+<span class="w-2 h-2 bg-primary rounded-full animate-pulse"></span>
+<span class="text-[10px] uppercase tracking-widest font-bold text-on-secondary-container">Now Booking for Nov</span>
+</span>
+<h3 class="text-2xl font-bold tracking-tight text-on-background">Consultation Summary</h3>
+<div class="space-y-4 py-6">
+<div class="flex items-start gap-4">
+<span class="material-symbols-outlined text-primary mt-1">medical_services</span>
+<div>
+<p class="text-sm font-bold tracking-widest uppercase text-on-surface-variant">Treatment</p>
+<p class="text-lg font-medium">Advanced Dermatological Screening</p>
+</div>
+</div>
+<div class="flex items-start gap-4">
+<span class="material-symbols-outlined text-primary mt-1">person</span>
+<div>
+<p class="text-sm font-bold tracking-widest uppercase text-on-surface-variant">Specialist</p>
+<p class="text-lg font-medium">Dr. Elena Sterling</p>
+</div>
+</div>
+<div class="flex items-start gap-4">
+<span class="material-symbols-outlined text-primary mt-1">schedule</span>
+<div>
+<p class="text-sm font-bold tracking-widest uppercase text-on-surface-variant">Duration</p>
+<p class="text-lg font-medium">45 Minutes</p>
+</div>
+</div>
+</div>
+</div>
+<div class="pt-8 border-t border-surface-container-high flex flex-col gap-4">
+<div class="flex justify-between items-center">
+<span class="text-on-surface-variant">Consultation Fee</span>
+<span class="text-xl font-bold">$120.00</span>
+</div>
+<button id="continueBtn" class="w-full py-5 bg-gradient-to-r from-primary to-primary-container text-on-primary font-bold tracking-widest uppercase rounded-lg shadow-lg hover:opacity-90 transition-opacity active:scale-[0.98]">
+              Continue to Details
+            </button>
+<p class="text-center text-[10px] text-on-surface-variant uppercase tracking-widest">Secure clinical encrypted checkout</p>
+</div>
+</div>
+</aside>
+</div>
+<!-- Additional Design System Section: Patient Form -->
+<div id="step2View" class="hidden border-surface-container-high grid grid-cols-1 lg:grid-cols-12 gap-12 transition-all duration-500">
+<div class="lg:col-span-8 space-y-12">
+<div class="space-y-6 bg-surface-container-lowest p-8 rounded-xl shadow-sm border border-slate-100">
+<div class="flex items-center gap-4 mb-8 pb-8 border-b border-slate-100">
+<button id="backToStep1" class="p-2 bg-slate-50 hover:bg-slate-100 rounded-full transition-colors">
+<span class="material-symbols-outlined text-slate-600">arrow_back</span>
+</button>
+<div>
+<h2 class="text-2xl font-bold tracking-tight">Patient Information</h2>
+<p class="text-sm text-slate-500">Please provide your details to confirm the booking.</p>
+</div>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+<div class="space-y-2">
+<label class="text-[10px] uppercase tracking-widest font-bold text-on-surface-variant ml-1">Full Name</label>
+<input type="text" id="pName" class="w-full h-14 bg-surface-container-low rounded-lg border border-transparent focus:bg-white focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all outline-none px-4" placeholder="John Doe" disabled>
+</div>
+<div class="space-y-2">
+<label class="text-[10px] uppercase tracking-widest font-bold text-on-surface-variant ml-1">Phone Number</label>
+<input type="tel" id="pPhone" class="w-full h-14 bg-surface-container-low rounded-lg border border-transparent focus:bg-white focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all outline-none px-4" placeholder="+91 98765 43210" disabled>
+</div>
+<div class="md:col-span-2 space-y-2">
+<label class="text-[10px] uppercase tracking-widest font-bold text-on-surface-variant ml-1">Email Address</label>
+<input type="email" id="pEmail" class="w-full h-14 bg-surface-container-low rounded-lg border border-transparent focus:bg-white focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all outline-none px-4" placeholder="john@example.com" disabled>
+</div>
+</div>
+<button id="confirmBtn" class="w-full py-5 mt-8 bg-gradient-to-r from-primary to-primary-container text-on-primary font-bold tracking-widest uppercase rounded-lg shadow-lg hover:opacity-90 transition-opacity active:scale-[0.98]">
+  Confirm & Book Appointment
+</button>
+</div>
+</div>
+<div class="lg:col-span-4">
+<div class="bg-surface-container-lowest p-6 rounded-lg shadow-sm space-y-6">
+<h3 class="font-bold text-lg border-b border-slate-100 pb-4">Booking Summary</h3>
+<div class="space-y-4">
+<div class="flex justify-between text-sm">
+<span class="text-slate-500">Date</span>
+<span class="font-bold text-slate-900" id="summaryDate">Nov 5, 2026</span>
+</div>
+<div class="flex justify-between text-sm">
+<span class="text-slate-500">Time</span>
+<span class="font-bold text-slate-900" id="summaryTime">01:00 PM</span>
+</div>
+<div class="flex justify-between text-sm">
+<span class="text-slate-500">Specialist</span>
+<span class="font-bold text-slate-900">Dr. Elena Sterling</span>
+</div>
+<div class="pt-4 border-t border-slate-100 flex justify-between">
+<span class="font-bold text-slate-900">Total</span>
+<span class="font-bold text-primary">$120.00</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+<!-- Success Message (Step 3) -->
+<div id="step3View" class="hidden mt-12 max-w-2xl mx-auto p-12 bg-surface-container-lowest border border-slate-100 rounded-2xl text-center shadow-lg">
+  <div class="w-24 h-24 bg-orange-100 rounded-full flex items-center justify-center mx-auto mb-6">
+    <span class="material-symbols-outlined text-orange-500 text-5xl">hourglass_empty</span>
+  </div>
+  <h3 class="text-3xl font-bold text-slate-900 mb-4">Pending Confirmation</h3>
+  <p class="text-slate-600 mb-8 text-lg">Your booking request for <span id="successDate" class="font-bold"></span> at <span id="successTime" class="font-bold"></span> has been sent to the clinic. Please wait for an administrator to approve it.</p>
+  <div class="flex flex-col sm:flex-row justify-center gap-4">
+    <a href="home.html" class="inline-block bg-surface-container-high text-slate-900 px-8 py-4 rounded-lg font-bold shadow-sm hover:bg-slate-200 transition-colors">Return to Home</a>
+  </div>
+</div>
+</main>
+<footer class="bg-slate-100 w-full pt-16 pb-8 mt-24">
+<div class="grid grid-cols-1 md:grid-cols-4 gap-8 px-6 lg:px-12 max-w-[1440px] mx-auto">
+<div class="space-y-4">
+<span class="text-sm font-bold text-slate-900 uppercase tracking-tighter">SLV CLINIC</span>
+<p class="text-xs font-normal text-slate-500 leading-relaxed max-w-xs">
+          Committed to providing world-class medical excellence through precision and care.
+        </p>
+</div>
+<div class="space-y-4">
+<h4 class="text-xs font-bold text-slate-900 uppercase tracking-widest">Contact Us</h4>
+<ul class="space-y-2">
+<li class="text-xs text-slate-500 leading-relaxed">
+          No. 12, 1st Main Road,<br/>
+          Vasanth Nagar, Bangalore - 560052,<br/>
+          Karnataka, India
+        </li>
+<li><a class="text-xs text-slate-500 hover:text-red-700 transition-colors" href="tel:+918022261234">+91 80 2226 1234</a></li>
+<li><a class="text-xs text-slate-500 hover:text-red-700 transition-colors" href="mailto:info@slvclinic.com">info@slvclinic.com</a></li>
+</ul>
+</div><div class="space-y-4">
+<h4 class="text-xs font-bold text-slate-900 uppercase tracking-widest">Resources</h4>
+<ul class="space-y-2">
+<li><a class="text-xs text-slate-500 hover:text-red-700 transition-colors" href="#">Patient Portal</a></li>
+<li><a class="text-xs text-slate-500 hover:text-red-700 transition-colors" href="#">Support</a></li>
+</ul>
+</div>
+<div class="space-y-4">
+<h4 class="text-xs font-bold text-slate-900 uppercase tracking-widest">Legal</h4>
+<ul class="space-y-2">
+<li><a class="text-xs text-slate-500 hover:text-red-700 transition-colors" href="#">Privacy Policy</a></li>
+<li><a class="text-xs text-slate-500 hover:text-red-700 transition-colors" href="#">Terms of Service</a></li>
+</ul>
+</div>
+<div class="space-y-4">
+<h4 class="text-xs font-bold text-slate-900 uppercase tracking-widest">Newsletter</h4>
+<div class="space-y-4">
+<h4 class="text-xs font-bold text-slate-900 uppercase tracking-widest">Contact Us</h4>
+<ul class="space-y-2">
+<li class="text-xs text-slate-500 leading-relaxed">
+          No. 12, 1st Main Road,<br/>
+          Vasanth Nagar, Bangalore - 560052,<br/>
+          Karnataka, India
+        </li>
+<li><a class="text-xs text-slate-500 hover:text-red-700 transition-colors" href="tel:+918022261234">+91 80 2226 1234</a></li>
+<li><a class="text-xs text-slate-500 hover:text-red-700 transition-colors" href="mailto:info@slvclinic.com">info@slvclinic.com</a></li>
+</ul>
+</div><div class="flex gap-2">
+<input class="bg-white border-0 text-xs px-4 py-2 w-full rounded-lg" placeholder="Your email" type="email"/>
+<button class="bg-primary text-on-primary px-4 py-2 rounded-lg text-xs font-bold uppercase">Join</button>
+</div>
+</div>
+</div>
+<div class="max-w-[1440px] mx-auto px-6 lg:px-12 mt-16 pt-8 border-t border-slate-200">
+<p class="text-xs font-normal text-slate-500">© 2024 SLV Clinic. Editorial Medical Excellence.</p>
+</div>
+</footer>
+<!-- Fixed Bottom Navigation (Mobile Only Trigger) -->
+<nav class="lg:hidden fixed bottom-0 left-0 w-full flex justify-around items-center h-16 pb-safe px-4 bg-white/90 backdrop-blur-2xl shadow-[0_-4px_20px_rgba(0,0,0,0.05)] z-50">
+<a href="home.html" class="flex flex-col items-center justify-center text-slate-400">
+<span class="material-symbols-outlined">home</span>
+<span class="text-[10px] uppercase tracking-widest font-bold">Home</span>
+</a>
+<a href="services.html" class="flex flex-col items-center justify-center text-slate-400">
+<span class="material-symbols-outlined">stethoscope</span>
+<span class="text-[10px] uppercase tracking-widest font-bold">Services</span>
+</a>
+<div class="flex flex-col items-center justify-center text-red-700 pb-1">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">calendar_today</span>
+<span class="text-[10px] uppercase tracking-widest font-bold">Schedule</span>
+</div>
+</nav>
+
+<script>
+  const step1View = document.getElementById('step1View');
+  const step2View = document.getElementById('step2View');
+  const step3View = document.getElementById('step3View');
+  const continueBtn = document.getElementById('continueBtn');
+  const backToStep1 = document.getElementById('backToStep1');
+  const confirmBtn = document.getElementById('confirmBtn');
+  const stepNavs = document.querySelectorAll('.step-nav');
+  
+  let selectedTime = "01:00 PM";
+  let selectedDate = "Nov 5, 2026"; 
+
+  // Prefill user data
+  const currentUser = JSON.parse(localStorage.getItem('slv_current_user'));
+  if (currentUser) {
+      document.getElementById('pName').value = currentUser.name || '';
+      document.getElementById('pPhone').value = currentUser.phone || '';
+      document.getElementById('pEmail').value = currentUser.email || '';
+  }
+
+  // Date slot selection logic
+  document.querySelectorAll('.date-slot').forEach(btn => {
+    btn.addEventListener('click', (e) => {
+      document.querySelectorAll('.date-slot').forEach(b => {
+        b.className = "date-slot aspect-square flex items-center justify-center bg-surface-container-lowest hover:bg-surface-container-high transition-colors font-semibold rounded-lg shadow-sm";
+      });
+      e.target.className = "date-slot aspect-square flex items-center justify-center bg-primary text-on-primary font-bold rounded-lg shadow-md selected";
+      selectedDate = e.target.getAttribute('data-date');
+      updateSidebarSummary();
+    });
+  });
+
+  // Time slot selection logic
+  document.querySelectorAll('.time-slot').forEach(btn => {
+    btn.addEventListener('click', (e) => {
+      document.querySelectorAll('.time-slot').forEach(b => {
+        b.className = "time-slot py-4 bg-surface-container-lowest hover:bg-surface-container-high transition-all text-sm font-bold tracking-widest uppercase rounded-lg shadow-sm border border-transparent active:scale-[0.98]";
+      });
+      e.target.className = "time-slot py-4 bg-primary text-on-primary transition-all text-sm font-bold tracking-widest uppercase rounded-lg shadow-md active:scale-[0.98] selected";
+      selectedTime = e.target.innerText;
+      updateSidebarSummary();
+    });
+  });
+
+  function updateSidebarSummary() {
+    // Update summary texts if we wanted to
+  }
+
+  // Helper to update step indicators
+  function setStep(stepNum) {
+    stepNavs.forEach((nav, idx) => {
+      if (idx + 1 === stepNum) {
+        nav.classList.replace('text-on-surface-variant', 'text-primary');
+        nav.classList.add('bg-surface-container-lowest', 'border-b-2', 'border-primary', 'shadow-sm');
+        const icon = nav.querySelector('.material-symbols-outlined');
+        if(icon) icon.style.fontVariationSettings = "'FILL' 1";
+      } else {
+        nav.classList.replace('text-primary', 'text-on-surface-variant');
+        nav.classList.remove('bg-surface-container-lowest', 'border-b-2', 'border-primary', 'shadow-sm');
+        const icon = nav.querySelector('.material-symbols-outlined');
+        if(icon) icon.style.fontVariationSettings = "'FILL' 0";
+      }
+    });
+  }
+
+  // Go to Step 2 (Information)
+  continueBtn.addEventListener('click', () => {
+    step1View.classList.add('hidden');
+    step2View.classList.remove('hidden');
+    
+    document.getElementById('summaryDate').innerText = selectedDate;
+    document.getElementById('summaryTime').innerText = selectedTime;
+    
+    setStep(2);
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+    document.getElementById('pName').focus();
+  });
+
+  // Go back to Step 1
+  backToStep1.addEventListener('click', () => {
+    step2View.classList.add('hidden');
+    step1View.classList.remove('hidden');
+    setStep(1);
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  });
+
+  // Go to Step 3 (Confirm Booking)
+  confirmBtn.addEventListener('click', () => {
+    const name = document.getElementById('pName').value;
+    const phone = document.getElementById('pPhone').value;
+    const email = document.getElementById('pEmail').value;
+
+    if (!name || !phone || !email) {
+      alert('Please fill in your Name, Phone Number, and Email Address.');
+      return;
+    }
+
+    const booking = {
+      id: 'BKG-' + Math.random().toString(36).substr(2, 9).toUpperCase(),
+      date: selectedDate,
+      time: selectedTime,
+      patientName: name,
+      patientPhone: phone,
+      patientEmail: email,
+      treatment: 'Advanced Dermatological Screening',
+      specialist: 'Dr. Elena Sterling',
+      status: 'Pending',
+      timestamp: new Date().toISOString()
+    };
+
+    // Save to LocalStorage
+    const existingBookings = JSON.parse(localStorage.getItem('slv_bookings')) || [];
+    existingBookings.push(booking);
+    localStorage.setItem('slv_bookings', JSON.stringify(existingBookings));
+
+    // Show success state
+    step2View.classList.add('hidden');
+    step3View.classList.remove('hidden');
+    
+    document.getElementById('successDate').innerText = selectedDate;
+    document.getElementById('successTime').innerText = selectedTime;
+    
+    setStep(3);
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  });
+</script>
+</body></html>

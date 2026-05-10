@@ -1,0 +1,545 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<meta name="description" content="SLV Clinic - Family healthcare in Vasanth Nagar, Bangalore. 45+ years of clinical excellence across four generations." />
+<title>SLV Clinic | Clinical Excellence</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "surface-dim": "#dadada",
+                    "on-primary": "#ffffff",
+                    "on-tertiary": "#ffffff",
+                    "on-error-container": "#93000a",
+                    "error": "#ba1a1a",
+                    "outline": "#8f6f6f",
+                    "tertiary-fixed": "#e4e2e1",
+                    "outline-variant": "#e3bebd",
+                    "error-container": "#ffdad6",
+                    "primary": "#9e0027",
+                    "on-surface-variant": "#5b4040",
+                    "tertiary-container": "#666565",
+                    "on-surface": "#1a1c1c",
+                    "surface-bright": "#f9f9f9",
+                    "on-tertiary-fixed": "#1b1c1c",
+                    "on-primary-container": "#ffdada",
+                    "surface-container-high": "#e8e8e8",
+                    "on-background": "#1a1c1c",
+                    "secondary-fixed": "#e5e2e1",
+                    "on-primary-fixed-variant": "#920023",
+                    "inverse-on-surface": "#f1f1f1",
+                    "inverse-primary": "#ffb3b4",
+                    "background": "#f9f9f9",
+                    "secondary": "#5f5e5e",
+                    "surface-container-low": "#f3f3f3",
+                    "primary-fixed-dim": "#ffb3b4",
+                    "on-secondary": "#ffffff",
+                    "on-tertiary-container": "#e5e3e2",
+                    "on-secondary-fixed": "#1c1b1b",
+                    "on-secondary-fixed-variant": "#474746",
+                    "surface-container-highest": "#e2e2e2",
+                    "surface-tint": "#ba1434",
+                    "tertiary": "#4d4d4d",
+                    "surface-variant": "#e2e2e2",
+                    "on-primary-fixed": "#40000a",
+                    "inverse-surface": "#2f3131",
+                    "surface-container": "#eeeeee",
+                    "on-error": "#ffffff",
+                    "surface": "#f9f9f9",
+                    "on-tertiary-fixed-variant": "#474747",
+                    "on-secondary-container": "#636262",
+                    "secondary-container": "#e2dfde",
+                    "surface-container-lowest": "#ffffff",
+                    "secondary-fixed-dim": "#c8c6c5",
+                    "tertiary-fixed-dim": "#c8c6c6",
+                    "primary-container": "#c41e3a",
+                    "primary-fixed": "#ffdad9"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.125rem",
+                    "lg": "0.25rem",
+                    "xl": "0.5rem",
+                    "full": "0.75rem"
+            },
+            "fontFamily": {
+                    "headline": ["Inter"],
+                    "body": ["Inter"],
+                    "label": ["Inter"]
+            }
+          }
+        }
+      }
+    </script>
+<style>
+        body { font-family: 'Inter', sans-serif; scroll-behavior: smooth; }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .signature-gradient {
+            background: linear-gradient(135deg, #9e0027 0%, #c41e3a 100%);
+        }
+        .glass-nav {
+            background: rgba(255, 255, 255, 0.8);
+            backdrop-filter: blur(24px);
+        }
+        /* Page entrance animation */
+        @keyframes fadeSlideIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+        main { animation: fadeSlideIn 0.6s ease-out; }
+        /* Mobile menu */
+        .mobile-overlay { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.4); z-index: 60; backdrop-filter: blur(4px); }
+        .mobile-overlay.active { display: block; }
+        .mobile-drawer { position: fixed; top: 0; right: -100%; width: 280px; height: 100%; background: #fff; z-index: 70; transition: right 0.35s cubic-bezier(0.4,0,0.2,1); padding: 2rem; box-shadow: -10px 0 40px rgba(0,0,0,0.1); }
+        .mobile-drawer.active { right: 0; }
+        .mobile-drawer a { display: block; padding: 1rem 0; font-size: 1.1rem; font-weight: 600; color: #1a1c1c; border-bottom: 1px solid #f3f3f3; transition: color 0.2s; }
+        .mobile-drawer a:hover, .mobile-drawer a.active-link { color: #9e0027; }
+        .hamburger { display: none; background: none; border: none; cursor: pointer; }
+        @media (max-width: 767px) { .hamburger { display: flex; } }
+        /* Scroll reveal */
+        .reveal { opacity: 0; transform: translateY(30px); transition: opacity 0.7s ease, transform 0.7s ease; }
+        .reveal.visible { opacity: 1; transform: translateY(0); }
+    </style>
+</head>
+<body class="bg-surface text-on-surface font-body min-h-screen selection:bg-primary-container selection:text-on-primary-container">
+<script>
+    if (!localStorage.getItem('slv_current_user')) {
+        window.location.replace('index.html');
+    }
+    function logout() {
+        localStorage.removeItem('slv_current_user');
+        window.location.replace('index.html');
+    }
+</script>
+<!-- TopAppBar -->
+<header class="fixed top-0 w-full z-50 glass-nav shadow-sm">
+<div class="w-full bg-yellow-400 text-black text-center py-2 text-xs md:text-sm font-bold uppercase tracking-widest shadow-md">
+    This website here is just for an example
+</div>
+<div class="flex justify-between items-center h-20 px-6 lg:px-12 max-w-[1440px] mx-auto">
+<a href="home.html" class="text-xl font-bold tracking-tighter text-slate-900">SLV CLINIC</a>
+<nav class="hidden md:flex items-center space-x-8">
+<a href="home.html" class="hidden md:block text-sm font-bold tracking-widest uppercase text-slate-500 hover:text-slate-900 transition-colors">Home</a>
+<a href="services.html" class="hidden md:block text-sm font-bold tracking-widest uppercase text-slate-500 hover:text-slate-900 transition-colors">Services</a>
+<a href="#about" class="hidden md:block text-sm font-bold tracking-widest uppercase text-slate-500 hover:text-slate-900 transition-colors">About</a>
+<a href="#contact" class="hidden md:block text-sm font-bold tracking-widest uppercase text-slate-500 hover:text-slate-900 transition-colors">Contact</a>
+</nav>
+<div class="flex items-center gap-4">
+<a href="patient_dashboard.html" class="hidden md:flex items-center gap-1 text-xs font-bold uppercase tracking-widest text-slate-500 hover:text-slate-900 transition-colors">
+<span class="material-symbols-outlined text-[16px]">account_circle</span> Dashboard
+</a>
+<button onclick="logout()" class="hidden md:flex items-center gap-1 text-xs font-bold uppercase tracking-widest text-red-500 hover:text-red-700 transition-colors">
+<span class="material-symbols-outlined text-[16px]">logout</span> Logout
+</button>
+<button class="hamburger material-symbols-outlined text-slate-600 p-2" id="menuBtn" aria-label="Open menu">menu</button>
+<a href="booking.html" class="signature-gradient text-white px-6 py-2.5 rounded-lg font-medium text-sm transition-transform active:scale-95 shadow-lg shadow-primary/20">
+                    Book Now
+                </a>
+</div>
+</div>
+</header>
+<!-- Mobile Menu -->
+<div class="mobile-overlay" id="mobileOverlay"></div>
+<div class="mobile-drawer" id="mobileDrawer">
+<div class="flex justify-between items-center mb-8"><span class="text-lg font-bold tracking-tighter">SLV CLINIC</span><button id="closeMenu" class="material-symbols-outlined text-slate-500">close</button></div>
+<a href="home.html" class="active-link">Home</a>
+<a href="services.html">Services</a>
+<a href="#about" onclick="closeMenuFn()">About</a>
+<a href="#contact" onclick="closeMenuFn()">Contact</a>
+<a href="patient_dashboard.html" class="flex items-center gap-2 mt-4 text-sm"><span class="material-symbols-outlined text-[18px]">account_circle</span> Dashboard</a>
+<button onclick="logout()" class="flex items-center gap-2 mt-4 text-sm text-red-500"><span class="material-symbols-outlined text-[18px]">logout</span> Logout</button>
+<a href="booking.html" class="mt-4" style="color:#9e0027;">Book Consultation</a>
+</div>
+<main class="pt-20">
+<!-- Hero Section: Asymmetric High-Impact -->
+<section class="relative min-h-[870px] flex items-center overflow-hidden px-6 lg:px-12 bg-surface">
+<div class="max-w-[1440px] mx-auto w-full grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+<div class="lg:col-span-7 z-10">
+<div class="inline-flex items-center gap-2 mb-6 px-3 py-1 bg-secondary-container rounded-full">
+<span class="w-2 h-2 rounded-full bg-primary animate-pulse"></span>
+<span class="text-[10px] uppercase tracking-widest font-bold text-on-secondary-container">Open for Appointments</span>
+</div>
+<h1 class="text-5xl lg:text-7xl font-extrabold tracking-tighter leading-[1.1] mb-8 text-on-surface">
+                        Family Clinic Where <span class="text-primary">Doctors Care</span> for Four Generations
+                    </h1>
+<p class="text-body-lg text-on-surface-variant max-w-xl leading-relaxed mb-10 text-lg">
+                        Providing compassionate, patient-centered healthcare in Vasanth Nagar. We combine clinical precision with the warmth of a family practice.
+                    </p>
+<div class="flex flex-wrap gap-4">
+<a class="signature-gradient text-white px-8 py-4 rounded-lg font-bold flex items-center gap-2 shadow-xl shadow-primary/20" href="https://www.google.com/maps/dir/12.9896194,77.5927948/12.9925012,77.5936276/@12.9910603,77.592322,18z/data=!3m1!4b1!4m4!4m3!1m1!4e1!1m0?entry=ttu&amp;g_ep=EgoyMDI2MDQxNS4wIKXMDSoASAFQAw%3D%3D" rel="noopener noreferrer" target="_blank">Get directions <span class="material-symbols-outlined">directions</span></a>
+<div class="flex flex-col">
+<span class="label-sm text-on-surface-variant font-bold tracking-widest uppercase text-[10px]">Direct line</span>
+<span class="text-xl font-bold">+91 80 2226 1234</span>
+</div>
+</div>
+</div>
+<div class="lg:col-span-5 relative">
+<div class="aspect-[4/5] rounded-xl overflow-hidden shadow-2xl relative">
+<img alt="Doctor consultation" class="w-full h-full object-cover" data-alt="Modern medical professional in a clean bright clinical setting with soft natural light and professional warm atmosphere" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAUdu2SKXsVWPdgUxVay2vcm7oYf95uHsD6boyPWCByb4CKZrzvBF_23bcT7h074V6UtklGoi7nrsMKz9lbmCzw2-bgBz9i_Hco46utlF1gztVpL7wY2d9r4e6xUWFLMoHidL5n1Nbl8Iy23PtA_CF3rW3aoFUX-ZJ1posDD2EuEayXTyrsQyi66GEt399XlgdnGXMkGw94ipTMXGxgYXy_1aM9YTksucAAwh-gPcV_wu3DwrlOukxCXXGuJvlLvszJVOh3ZiviXQpL"/>
+</div>
+<div class="absolute -bottom-6 -left-6 bg-surface-container-lowest p-6 rounded-lg shadow-xl max-w-[200px]">
+<p class="text-primary font-black text-4xl mb-1">45+</p>
+<p class="text-xs font-medium text-on-surface-variant leading-snug">Years of Clinical Excellence in Bangalore</p>
+</div>
+</div>
+</div>
+</section>
+<!-- About Section -->
+<section id="about" class="py-24 bg-surface-container-lowest reveal">
+<div class="max-w-[1440px] mx-auto px-6 lg:px-12">
+<div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+<div>
+<span class="text-[10px] uppercase tracking-widest font-bold text-primary mb-4 block">About Us</span>
+<h2 class="text-4xl lg:text-5xl font-extrabold tracking-tighter leading-tight mb-6">A Legacy of <span class="text-primary">Healing</span> Since 1978</h2>
+<p class="text-on-surface-variant leading-relaxed mb-6 text-lg">Founded by Dr. S. L. Venkatesh in the heart of Vasanth Nagar, SLV Clinic has served four generations of Bangalore families. What started as a small family practice has grown into a trusted multi-specialty clinic — without ever losing the personal touch that defined our beginnings.</p>
+<p class="text-on-surface-variant leading-relaxed mb-8">Our team of experienced physicians combines time-tested medical wisdom with modern diagnostic technology to deliver care that is both compassionate and precise. We believe healthcare is a relationship, not a transaction.</p>
+<div class="grid grid-cols-3 gap-6">
+<div><p class="text-primary font-black text-3xl">45+</p><p class="text-xs text-on-surface-variant mt-1">Years of Service</p></div>
+<div><p class="text-primary font-black text-3xl">10K+</p><p class="text-xs text-on-surface-variant mt-1">Families Served</p></div>
+<div><p class="text-primary font-black text-3xl">4</p><p class="text-xs text-on-surface-variant mt-1">Generations</p></div>
+</div>
+</div>
+<div class="relative">
+<div class="aspect-[4/5] rounded-xl overflow-hidden shadow-2xl">
+<img alt="SLV Clinic team" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAUdu2SKXsVWPdgUxVay2vcm7oYf95uHsD6boyPWCByb4CKZrzvBF_23bcT7h074V6UtklGoi7nrsMKz9lbmCzw2-bgBz9i_Hco46utlF1gztVpL7wY2d9r4e6xUWFLMoHidL5n1Nbl8Iy23PtA_CF3rW3aoFUX-ZJ1posDD2EuEayXTyrsQyi66GEt399XlgdnGXMkGw94ipTMXGxgYXy_1aM9YTksucAAwh-gPcV_wu3DwrlOukxCXXGuJvlLvszJVOh3ZiviXQpL"/>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Value Section: Why Vasanth Nagar Trusts Us -->
+<section class="py-24 bg-surface-container-low">
+<div class="max-w-[1440px] mx-auto px-6 lg:px-12">
+<div class="mb-16 max-w-2xl">
+<h2 class="text-4xl font-bold tracking-tight mb-4">Why Vasanth Nagar Trusts Us</h2>
+<p class="text-on-surface-variant leading-relaxed">Built on a foundation of trust and meticulous medical care since 1978.</p>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+<!-- Value Card 1 -->
+<div class="bg-surface-container-lowest p-10 rounded-lg transition-all duration-300 hover:-translate-y-2">
+<span class="material-symbols-outlined text-primary text-4xl mb-6">diversity_1</span>
+<h3 class="text-xl font-bold mb-4">Generational Care</h3>
+<p class="text-on-surface-variant text-sm leading-relaxed">We are proud to serve the children, parents, and grandparents of the families who started with us decades ago.</p>
+</div>
+<!-- Value Card 2 -->
+<div class="bg-surface-container-lowest p-10 rounded-lg transition-all duration-300 hover:-translate-y-2">
+<span class="material-symbols-outlined text-primary text-4xl mb-6">verified_user</span>
+<h3 class="text-xl font-bold mb-4">Personalized Attention</h3>
+<p class="text-on-surface-variant text-sm leading-relaxed">You aren't just a file number. Every treatment plan is uniquely tailored to your lifestyle and long-term health goals.</p>
+</div>
+<!-- Value Card 3 -->
+<div class="bg-surface-container-lowest p-10 rounded-lg transition-all duration-300 hover:-translate-y-2">
+<span class="material-symbols-outlined text-primary text-4xl mb-6">clinical_notes</span>
+<h3 class="text-xl font-bold mb-4">Modern Diagnostics</h3>
+<p class="text-on-surface-variant text-sm leading-relaxed">Old school values meet new school technology. We utilize precision diagnostics for early detection and prevention.</p>
+</div>
+</div>
+</div>
+</section>
+<!-- Most Valued Services: Bento Grid -->
+<section class="py-24 px-6 lg:px-12 max-w-[1440px] mx-auto">
+<h2 class="text-4xl font-bold tracking-tight mb-16">Most Valued Services</h2>
+<div class="grid grid-cols-1 md:grid-cols-4 grid-rows-2 gap-6 h-full md:h-[600px]">
+<!-- Service 1: Large -->
+<div class="md:col-span-2 md:row-span-2 bg-surface-container-lowest rounded-lg overflow-hidden group relative">
+<img alt="General Practice" class="w-full h-full object-cover opacity-80 group-hover:scale-105 transition-transform duration-500" data-alt="Close up of professional medical equipment on a clean surface in a bright hospital room with soft bokeh background" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAyeg49xExvnpvyNDc2F148nxoTbaoDW7LtilPCKjiHU58GP1g3CgU4kqx7oRNZgz8Z6TaKjotLeuOjgkupPpg3wb0jCsjZhN384Tt0NvopOVFVBa3_Xp16hJLH99VziSuIVQi-EOQHe8W_BqW4cGw6TGzQzUnbCdTE9uvckXYK6j7FDqMEWYpT1hBdjDp6g7hpUlpfC3voE2T96tNfQa153VNc453fmtghdE-hAd337JexL20ZO5LWTcNAb3HHn5yOhJMmLgKf0QSA"/>
+<div class="absolute inset-0 bg-gradient-to-t from-on-surface/90 to-transparent p-10 flex flex-col justify-end">
+<h3 class="text-white text-3xl font-bold mb-4">General Practice</h3>
+<p class="text-white/80 text-sm max-w-xs">Comprehensive health checkups, chronic disease management, and preventive care for all ages.</p>
+</div>
+</div>
+<!-- Service 2 -->
+<div class="md:col-span-2 bg-surface-container-high rounded-lg p-10 flex justify-between items-center group">
+<div>
+<h3 class="text-2xl font-bold mb-2">Pediatrics</h3>
+<p class="text-on-surface-variant text-sm max-w-xs">Specialized care for infants and children including vaccinations and growth tracking.</p>
+</div>
+<span class="material-symbols-outlined text-primary text-5xl opacity-40 group-hover:opacity-100 transition-opacity">child_care</span>
+</div>
+<!-- Service 3 -->
+<div class="md:col-span-1 bg-primary text-white rounded-lg p-10 flex flex-col justify-between">
+<span class="material-symbols-outlined text-4xl">ecg</span>
+<h3 class="text-xl font-bold">Cardiology Screening</h3>
+</div>
+<!-- Service 4 -->
+<div class="md:col-span-1 bg-surface-container-lowest rounded-lg p-10 flex flex-col justify-between border border-outline-variant/10">
+<span class="material-symbols-outlined text-primary text-4xl">lab_research</span>
+<h3 class="text-xl font-bold">Diagnostic Lab</h3>
+</div>
+</div>
+</section>
+<!-- Additional Services: List -->
+<section class="py-24 bg-surface">
+<div class="max-w-[1440px] mx-auto px-6 lg:px-12 flex flex-col lg:flex-row gap-16">
+<div class="lg:w-1/3">
+<h2 class="text-3xl font-bold mb-6">Additional Services</h2>
+<p class="text-on-surface-variant leading-relaxed mb-8">Specialized clinical departments managed by senior consultants.</p>
+<a href="services.html" class="text-primary font-bold flex items-center gap-2 hover:gap-4 transition-all">
+                        View Full Directory <span class="material-symbols-outlined">arrow_forward</span>
+</a>
+</div>
+<div class="lg:w-2/3 grid grid-cols-1 sm:grid-cols-2 gap-x-12 gap-y-8">
+<div class="flex items-start gap-4">
+<span class="text-primary font-black text-lg">01</span>
+<div>
+<h4 class="font-bold mb-1">Dermatology</h4>
+<p class="text-xs text-on-surface-variant">Skin treatments and cosmetic consultations.</p>
+</div>
+</div>
+<div class="flex items-start gap-4">
+<span class="text-primary font-black text-lg">02</span>
+<div>
+<h4 class="font-bold mb-1">Physiotherapy</h4>
+<p class="text-xs text-on-surface-variant">Post-surgical rehab and sports injury recovery.</p>
+</div>
+</div>
+<div class="flex items-start gap-4">
+<span class="text-primary font-black text-lg">03</span>
+<div>
+<h4 class="font-bold mb-1">Geriatric Care</h4>
+<p class="text-xs text-on-surface-variant">Focused medical attention for our senior citizens.</p>
+</div>
+</div>
+<div class="flex items-start gap-4">
+<span class="text-primary font-black text-lg">04</span>
+<div>
+<h4 class="font-bold mb-1">Minor Surgery</h4>
+<p class="text-xs text-on-surface-variant">Day-care procedures with minimal downtime.</p>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Special Touches & Tips -->
+<section class="py-24 px-6 lg:px-12 max-w-[1440px] mx-auto">
+<div class="grid grid-cols-1 lg:grid-cols-2 gap-12">
+<!-- Special Touches -->
+<div class="bg-surface-container-low rounded-lg p-12">
+<h3 class="text-2xl font-bold mb-8 flex items-center gap-3">
+<span class="material-symbols-outlined text-primary" data-weight="fill">spa</span> Special touches
+                    </h3>
+<ul class="space-y-6">
+<li class="flex gap-4">
+<span class="material-symbols-outlined text-primary">coffee</span>
+<div>
+<p class="font-bold">Patient Lounge</p>
+<p class="text-sm text-on-surface-variant">Complimentary herbal tea and calm ambient music while you wait.</p>
+</div>
+</li>
+<li class="flex gap-4">
+<span class="material-symbols-outlined text-primary">digital_out_of_home</span>
+<div>
+<p class="font-bold">Paperless Records</p>
+<p class="text-sm text-on-surface-variant">Secure digital history accessible to you anytime via our patient portal.</p>
+</div>
+</li>
+</ul>
+</div>
+<!-- Tips -->
+<div class="bg-surface-container-lowest border border-outline-variant/20 rounded-lg p-12">
+<h3 class="text-2xl font-bold mb-8 flex items-center gap-3">
+<span class="material-symbols-outlined text-primary" data-weight="fill">tips_and_updates</span> Tips from frequent customers
+                    </h3>
+<div class="space-y-8">
+<blockquote class="relative">
+<span class="text-6xl text-primary/10 absolute -top-8 -left-4 font-serif">"</span>
+<p class="text-on-surface italic mb-4">"Book morning slots between 9 AM and 10 AM for the shortest waiting times. The staff is exceptionally helpful with elderly patients."</p>
+<cite class="text-xs font-bold uppercase tracking-widest text-on-surface-variant block">— Rajesh M., Vasanth Nagar Resident</cite>
+</blockquote>
+<div class="p-4 bg-secondary-container rounded flex gap-4 items-center">
+<span class="material-symbols-outlined text-primary">local_parking</span>
+<p class="text-xs font-medium">Free dedicated parking available for patients in the basement level.</p>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Contact & Map Section -->
+<section id="contact" class="py-24 bg-surface-container-low reveal">
+<div class="max-w-[1440px] mx-auto px-6 lg:px-12">
+<div class="flex flex-col lg:flex-row gap-12 items-center">
+<div class="w-full lg:w-1/2">
+<h2 class="text-4xl font-bold tracking-tight mb-6 text-on-surface">Find Us in Vasanth Nagar</h2>
+<div class="bg-surface-container-lowest p-8 rounded-lg shadow-sm border border-outline-variant/20 mb-8">
+<div class="flex items-start gap-4 mb-6">
+<span class="material-symbols-outlined text-primary mt-1">location_on</span>
+<div>
+<p class="font-bold text-on-surface mb-2 text-lg">SLV Clinic</p>
+<p class="text-on-surface-variant leading-relaxed">
+                                No. 12, 1st Main Road,<br/>
+                                Vasanth Nagar, Bangalore - 560052<br/>
+                                Karnataka, India
+                            </p>
+</div>
+</div>
+<a class="signature-gradient text-white px-8 py-4 rounded-lg font-bold inline-flex items-center gap-2 shadow-xl shadow-primary/20 transition-transform active:scale-95" href="https://www.google.com/maps/dir/12.9896194,77.5927948/12.9925012,77.5936276/@12.9910603,77.592322,18z/data=!3m1!4b1!4m4!4m3!1m1!4e1!1m0?entry=ttu&amp;g_ep=EgoyMDI2MDQxNS4wIKXMDSoASAFQAw%3D%3D" rel="noopener noreferrer" target="_blank">
+                            Get Directions <span class="material-symbols-outlined">directions</span>
+</a>
+</div>
+</div>
+<div class="w-full lg:w-1/2">
+<div class="rounded-xl overflow-hidden shadow-2xl border-4 border-white">
+<img alt="Map location of SLV Clinic in Vasanth Nagar" class="w-full h-auto object-cover" src="https://lh3.googleusercontent.com/aida/ADBb0uhHbQLOifa0ZLPjSMjWi0jCCB-zsBsIfsWgUgexh5QKMP7BiS8OHRHcDVDp7y7bixTY1arNmAOnnysB06h6nl1xE4Rn4Jkye9As7XEuvV-3nRCPwecFI-sdgxI9KYRZAIYA0inmSgkWvzgM1nDsaXW98QoWmwp646ZVASeCo1QCoLPnqJ1-FZYEiE6xxjagMWrucKCd4JUmwigDqW8eNJNpIaAtyp0zGlMbK9MFObr3MJ9U9N4wTY6SohBmKxSqsRQhQz5lBJw6Pzs"/>
+</div>
+</div>
+</div>
+</div>
+</section>
+</main>
+<!-- Footer -->
+<footer class="bg-slate-100 dark:bg-slate-900 w-full pt-16 pb-8">
+<div class="grid grid-cols-1 md:grid-cols-4 gap-8 px-6 lg:px-12 max-w-[1440px] mx-auto">
+<div class="col-span-1 md:col-span-1">
+<div class="text-sm font-bold text-slate-900 mb-6">SLV CLINIC</div>
+<p class="text-xs text-slate-500 leading-relaxed mb-6">Dedicated to providing the highest quality medical care in Bangalore's historic heart.</p>
+<div class="space-y-3 mb-8">
+<div class="flex items-start gap-2 text-xs text-slate-500">
+<span class="material-symbols-outlined text-base text-slate-400 shrink-0">location_on</span>
+<span>No. 12, 1st Main Road, Vasanth Nagar, Bangalore - 560052, Karnataka, India</span>
+</div>
+<div class="flex items-center gap-2 text-xs text-slate-500">
+<span class="material-symbols-outlined text-base text-slate-400 shrink-0">call</span>
+<span>+91 80 2226 1234</span>
+</div>
+<div class="flex items-center gap-2 text-xs text-slate-500">
+<span class="material-symbols-outlined text-base text-slate-400 shrink-0">mail</span>
+<span>info@slvclinic.com</span>
+</div>
+</div>
+<div class="flex gap-4">
+<span class="material-symbols-outlined text-slate-400 hover:text-red-700 cursor-pointer">social_leaderboard</span>
+<span class="material-symbols-outlined text-slate-400 hover:text-red-700 cursor-pointer">potted_plant</span>
+</div>
+</div>
+<div>
+<h5 class="text-xs font-bold uppercase tracking-widest text-slate-900 mb-6">Quick Links</h5>
+<ul class="space-y-3">
+<li><a class="text-xs text-slate-500 hover:text-red-700 transition-colors" href="index.html">Home</a></li>
+<li><a class="text-xs text-slate-500 hover:text-red-700 transition-colors" href="services.html">Services</a></li>
+<li><a class="text-xs text-slate-500 hover:text-red-700 transition-colors" href="booking.html">Book Consultation</a></li>
+</ul>
+</div>
+<div>
+<h5 class="text-xs font-bold uppercase tracking-widest text-slate-900 mb-6">Legal</h5>
+<ul class="space-y-3">
+<li><a class="text-xs text-slate-500 hover:text-red-700 transition-colors" href="#">Privacy Policy</a></li>
+<li><a class="text-xs text-slate-500 hover:text-red-700 transition-colors" href="#">Terms of Service</a></li>
+<li><a class="text-xs text-slate-500 hover:text-red-700 transition-colors" href="#">Support</a></li>
+</ul>
+</div>
+<div>
+<h5 class="text-xs font-bold uppercase tracking-widest text-slate-900 mb-6">Newsletter</h5>
+<p class="text-[10px] text-slate-500 mb-4">Subscribe for monthly health tips and clinic updates.</p>
+<div class="flex gap-2">
+<input class="bg-white border-none text-xs rounded-lg w-full focus:ring-1 focus:ring-primary" placeholder="Email" type="email"/>
+<button class="bg-primary text-white p-2 rounded-lg">
+<span class="material-symbols-outlined text-sm">send</span>
+</button>
+</div>
+</div>
+</div>
+<div class="max-w-[1440px] mx-auto px-6 lg:px-12 mt-16 pt-8 border-t border-slate-200">
+<p class="text-xs font-normal text-slate-500 text-center">© 2024 SLV Clinic. Editorial Medical Excellence.</p>
+</div>
+</footer>
+<!-- Bottom Navigation (Mobile Only) -->
+<nav class="lg:hidden fixed bottom-0 left-0 w-full flex justify-around items-center h-16 pb-safe px-4 bg-white/90 backdrop-blur-2xl shadow-[0_-4px_20px_rgba(0,0,0,0.05)] z-50">
+<a class="flex flex-col items-center justify-center text-red-700 pb-1" href="index.html">
+<span class="material-symbols-outlined">home</span>
+<span class="text-[10px] uppercase tracking-widest font-bold">Home</span>
+</a>
+<a class="flex flex-col items-center justify-center text-slate-400" href="services.html">
+<span class="material-symbols-outlined">stethoscope</span>
+<span class="text-[10px] uppercase tracking-widest font-bold">Services</span>
+</a>
+<a class="flex flex-col items-center justify-center text-slate-400" href="booking.html">
+<span class="material-symbols-outlined">calendar_today</span>
+<span class="text-[10px] uppercase tracking-widest font-bold">Book</span>
+</a>
+<a class="flex flex-col items-center justify-center text-slate-400" href="#contact">
+<span class="material-symbols-outlined">call</span>
+<span class="text-[10px] uppercase tracking-widest font-bold">Contact</span>
+</a>
+</nav>
+<script>
+// Mobile menu
+const menuBtn = document.getElementById('menuBtn');
+const closeMenu = document.getElementById('closeMenu');
+const overlay = document.getElementById('mobileOverlay');
+const drawer = document.getElementById('mobileDrawer');
+function openMenu() { overlay.classList.add('active'); drawer.classList.add('active'); }
+function closeMenuFn() { overlay.classList.remove('active'); drawer.classList.remove('active'); }
+menuBtn.addEventListener('click', openMenu);
+closeMenu.addEventListener('click', closeMenuFn);
+overlay.addEventListener('click', closeMenuFn);
+document.querySelectorAll('.mobile-nav-link').forEach(a => a.addEventListener('click', closeMenuFn));
+// Scroll reveal
+const reveals = document.querySelectorAll('.reveal');
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); } });
+}, { threshold: 0.15 });
+reveals.forEach(el => observer.observe(el));
+
+// Notifications for Bookings
+function showNotification(title, message, type) {
+    const toast = document.createElement('div');
+    toast.className = `fixed top-24 right-6 p-4 rounded-lg shadow-2xl z-[100] transform transition-all translate-x-full opacity-0 max-w-sm w-full flex items-start gap-4 border ${type === 'success' ? 'bg-green-50 border-green-200' : 'bg-red-50 border-red-200'}`;
+    toast.innerHTML = `
+        <span class="material-symbols-outlined mt-0.5 ${type === 'success' ? 'text-green-500' : 'text-red-500'}">
+            ${type === 'success' ? 'check_circle' : 'cancel'}
+        </span>
+        <div>
+            <h4 class="font-bold text-gray-900">${title}</h4>
+            <p class="text-sm text-gray-600 mt-1">${message}</p>
+        </div>
+        <button class="ml-auto text-gray-400 hover:text-gray-600" onclick="this.parentElement.remove()">
+            <span class="material-symbols-outlined">close</span>
+        </button>
+    `;
+    document.body.appendChild(toast);
+    
+    // Animate in
+    requestAnimationFrame(() => {
+        toast.classList.remove('translate-x-full', 'opacity-0');
+    });
+
+    // Auto remove after 8 seconds
+    setTimeout(() => {
+        toast.classList.add('translate-x-full', 'opacity-0');
+        setTimeout(() => toast.remove(), 300);
+    }, 8000);
+}
+
+const currentUser = JSON.parse(localStorage.getItem('slv_current_user'));
+if (currentUser) {
+    const allBookings = JSON.parse(localStorage.getItem('slv_bookings')) || [];
+    let bookingsUpdated = false;
+    
+    allBookings.forEach(b => {
+        if (b.patientEmail.toLowerCase() === currentUser.email.toLowerCase()) {
+            if ((b.status === 'Confirmed' || b.status === 'Rejected') && !b.notified) {
+                const title = b.status === 'Confirmed' ? 'Booking Confirmed!' : 'Booking Rejected';
+                const msg = b.status === 'Confirmed' 
+                    ? `Your booking for ${b.date} at ${b.time} has been confirmed.`
+                    : `Your booking for ${b.date} has been rejected. Reason: ${b.rejectReason || 'Not provided'}`;
+                
+                setTimeout(() => showNotification(title, msg, b.status === 'Confirmed' ? 'success' : 'error'), 1000);
+                
+                b.notified = true;
+                bookingsUpdated = true;
+            }
+        }
+    });
+
+    if (bookingsUpdated) {
+        localStorage.setItem('slv_bookings', JSON.stringify(allBookings));
+    }
+}
+</script>
+</body></html>

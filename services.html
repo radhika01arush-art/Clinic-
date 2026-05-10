@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Services | SLV CLINIC</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "surface-dim": "#dadada",
+                        "on-primary": "#ffffff",
+                        "on-tertiary": "#ffffff",
+                        "on-error-container": "#93000a",
+                        "error": "#ba1a1a",
+                        "outline": "#8f6f6f",
+                        "tertiary-fixed": "#e4e2e1",
+                        "outline-variant": "#e3bebd",
+                        "error-container": "#ffdad6",
+                        "primary": "#9e0027",
+                        "on-surface-variant": "#5b4040",
+                        "tertiary-container": "#666565",
+                        "on-surface": "#1a1c1c",
+                        "surface-bright": "#f9f9f9",
+                        "on-tertiary-fixed": "#1b1c1c",
+                        "on-primary-container": "#ffdada",
+                        "surface-container-high": "#e8e8e8",
+                        "on-background": "#1a1c1c",
+                        "secondary-fixed": "#e5e2e1",
+                        "on-primary-fixed-variant": "#920023",
+                        "inverse-on-surface": "#f1f1f1",
+                        "inverse-primary": "#ffb3b4",
+                        "background": "#f9f9f9",
+                        "secondary": "#5f5e5e",
+                        "surface-container-low": "#f3f3f3",
+                        "primary-fixed-dim": "#ffb3b4",
+                        "on-secondary": "#ffffff",
+                        "on-tertiary-container": "#e5e3e2",
+                        "on-secondary-fixed": "#1c1b1b",
+                        "on-secondary-fixed-variant": "#474746",
+                        "surface-container-highest": "#e2e2e2",
+                        "surface-tint": "#ba1434",
+                        "tertiary": "#4d4d4d",
+                        "surface-variant": "#e2e2e2",
+                        "on-primary-fixed": "#40000a",
+                        "inverse-surface": "#2f3131",
+                        "surface-container": "#eeeeee",
+                        "on-error": "#ffffff",
+                        "surface": "#f9f9f9",
+                        "on-tertiary-fixed-variant": "#474747",
+                        "on-secondary-container": "#636262",
+                        "secondary-container": "#e2dfde",
+                        "surface-container-lowest": "#ffffff",
+                        "secondary-fixed-dim": "#c8c6c5",
+                        "tertiary-fixed-dim": "#c8c6c6",
+                        "primary-container": "#c41e3a",
+                        "primary-fixed": "#ffdad9"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.125rem",
+                        "lg": "0.25rem",
+                        "xl": "0.5rem",
+                        "full": "0.75rem"
+                    },
+                    "fontFamily": {
+                        "headline": ["Inter"],
+                        "body": ["Inter"],
+                        "label": ["Inter"]
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+        body { font-family: 'Inter', sans-serif; scroll-behavior: smooth; }
+        .material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24; }
+        .glass-nav { backdrop-filter: blur(24px); }
+        .status-pulse { animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite; }
+        @keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: .5; } }
+        .service-card-gradient { background: linear-gradient(135deg, #9e0027 0%, #c41e3a 100%); }
+        @keyframes fadeSlideIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+        main { animation: fadeSlideIn 0.6s ease-out; }
+        .mobile-overlay { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.4); z-index: 60; backdrop-filter: blur(4px); }
+        .mobile-overlay.active { display: block; }
+        .mobile-drawer { position: fixed; top: 0; right: -100%; width: 280px; height: 100%; background: #fff; z-index: 70; transition: right 0.35s cubic-bezier(0.4,0,0.2,1); padding: 2rem; box-shadow: -10px 0 40px rgba(0,0,0,0.1); }
+        .mobile-drawer.active { right: 0; }
+        .mobile-drawer a { display: block; padding: 1rem 0; font-size: 1.1rem; font-weight: 600; color: #1a1c1c; border-bottom: 1px solid #f3f3f3; transition: color 0.2s; }
+        .mobile-drawer a:hover, .mobile-drawer a.active-link { color: #9e0027; }
+        .hamburger { display: none; background: none; border: none; cursor: pointer; }
+        @media (max-width: 767px) { .hamburger { display: flex; } }
+    </style>
+</head>
+<body class="bg-surface text-on-surface font-body min-h-screen selection:bg-primary-container selection:text-on-primary-container">
+<script>
+    if (!localStorage.getItem('slv_current_user')) {
+        window.location.replace('index.html');
+    }
+    function logout() {
+        localStorage.removeItem('slv_current_user');
+        window.location.replace('index.html');
+    }
+</script>
+<!-- TopAppBar -->
+<header class="fixed top-0 w-full z-50 bg-white/80 backdrop-blur-xl shadow-sm">
+<div class="w-full bg-yellow-400 text-black text-center py-2 text-xs md:text-sm font-bold uppercase tracking-widest shadow-md">
+    This website here is just for an example
+</div>
+<nav class="flex justify-between items-center h-20 px-6 lg:px-12 max-w-[1440px] mx-auto">
+<a href="home.html" class="text-xl font-bold tracking-tighter text-slate-900">SLV CLINIC</a>
+<div class="hidden md:flex items-center gap-8">
+<a class="text-slate-600 hover:text-slate-900 transition-colors duration-200" href="home.html">Home</a>
+<a class="text-red-700 font-semibold border-b-2 border-red-700 py-1 transition-colors duration-200" href="services.html">Services</a>
+<a class="text-slate-600 hover:text-slate-900 transition-colors duration-200" href="home.html#about">About</a>
+<a class="text-slate-600 hover:text-slate-900 transition-colors duration-200" href="home.html#contact">Contact</a>
+</div>
+<div class="flex items-center gap-4">
+<button class="hamburger material-symbols-outlined text-slate-600 p-2" id="menuBtn" aria-label="Open menu">menu</button>
+<a href="booking.html" class="hidden md:block bg-gradient-to-br from-primary to-primary-container text-white px-6 py-2 rounded-lg font-medium shadow-sm hover:scale-[0.98] transition-transform">Book Now</a>
+</div>
+</nav>
+</header>
+<div class="mobile-overlay" id="mobileOverlay"></div>
+<div class="mobile-drawer" id="mobileDrawer">
+<div class="flex justify-between items-center mb-8"><span class="text-lg font-bold tracking-tighter">SLV CLINIC</span><button id="closeMenu" class="material-symbols-outlined text-slate-500">close</button></div>
+<a href="home.html">Home</a>
+<a href="services.html" class="active-link">Services</a>
+<a href="home.html#about">About</a>
+<a href="home.html#contact">Contact</a>
+<a href="patient_dashboard.html" class="flex items-center gap-2 mt-4 text-sm"><span class="material-symbols-outlined text-[18px]">account_circle</span> Dashboard</a>
+<button onclick="logout()" class="flex items-center gap-2 mt-4 text-sm text-red-500"><span class="material-symbols-outlined text-[18px]">logout</span> Logout</button>
+<a href="booking.html" class="mt-4" style="color:#9e0027;">Book Consultation</a>
+</div>
+<main class="pt-32 pb-24 px-6 lg:px-12 max-w-[1440px] mx-auto">
+<!-- Hero Section: Editorial & Asymmetrical -->
+<section class="grid grid-cols-1 lg:grid-cols-12 gap-12 mb-24 items-end">
+<div class="lg:col-span-7">
+<span class="label-sm uppercase tracking-[0.05em] font-bold text-primary mb-4 block">Medical Portfolio</span>
+<h1 class="text-6xl md:text-7xl font-bold tracking-tighter leading-[1.1] mb-8">Clinical excellence, <br/>reimagined for you.</h1>
+<p class="text-lg text-on-surface-variant leading-relaxed max-w-xl">Our atelier of medical professionals combines rigorous science with empathetic care to provide treatments that prioritize your long-term vitality.</p>
+</div>
+<div class="lg:col-span-5 h-[400px] overflow-hidden rounded-lg bg-surface-container-low">
+<img class="w-full h-full object-cover" data-alt="Modern high-end clinical examination room with soft daylight, white walls, and minimalist high-tech medical equipment" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDEGAQ56E-5UEvCm3XoUf_s0TVztPeQyTgkL6y3sD9AnAAZs-LU4XYuz8gR65p3SLAWLQ_o174-06HcCbG-WckFsvIj0CHWFMwcTA1NEhFMw79U3rzniJcaRE7S0R5gPW0ApFHBnR936qfVbaDD-GFRUClsvs2v1uenqvhus_TnhB0xvKy87fUlcjhkpDi9-AUomHFBMicyPDDZErXNQRYf6aT-_29Ap0Qz_--rWO384UC0xlJObOZgMm3Q3tJpzXzJeBtoei7b46Nh"/>
+</div>
+</section>
+<!-- Filters Section -->
+<section class="mb-16">
+<div class="flex flex-col md:flex-row md:items-center justify-between gap-8 py-8 border-y-0 bg-surface-container-low px-8 rounded-lg">
+<div class="flex flex-wrap gap-4">
+<button class="bg-surface-container-lowest text-on-surface px-6 py-2 rounded-full font-medium shadow-sm border-2 border-primary/20">All Treatments</button>
+<button class="text-on-surface-variant hover:text-on-surface px-6 py-2 transition-colors">General Care</button>
+<button class="text-on-surface-variant hover:text-on-surface px-6 py-2 transition-colors">Pediatric Care</button>
+<button class="text-on-surface-variant hover:text-on-surface px-6 py-2 transition-colors">Specialist Services</button>
+</div>
+<div class="flex items-center gap-2 text-on-surface-variant">
+<span class="material-symbols-outlined" data-icon="tune">tune</span>
+<span class="text-sm font-medium">Refine View</span>
+</div>
+</div>
+</section>
+<!-- Service Bento Grid -->
+<section class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+<!-- Large Featured Card -->
+<div class="md:col-span-2 lg:col-span-2 bg-surface-container-lowest rounded-lg p-10 flex flex-col md:flex-row gap-8 items-center shadow-sm">
+<div class="flex-1 order-2 md:order-1">
+<div class="flex items-center gap-2 mb-4">
+<div class="w-2 h-2 rounded-full bg-primary status-pulse"></div>
+<span class="label-sm uppercase tracking-widest font-bold text-on-surface-variant">Premier Choice</span>
+</div>
+<h3 class="text-3xl font-bold tracking-tight mb-4 text-on-surface">Comprehensive Specialist Consult</h3>
+<p class="text-on-surface-variant mb-8 leading-relaxed">A deep-dive assessment with our leading senior clinicians, utilizing advanced diagnostic imaging and personalized health roadmapping.</p>
+<a href="booking.html" class="bg-gradient-to-br from-primary to-primary-container text-white px-8 py-3 rounded-lg font-semibold hover:scale-[0.98] transition-all">Book Comprehensive Consultation</a>
+</div>
+<div class="w-full md:w-72 h-72 rounded-lg bg-surface-container-low overflow-hidden order-1 md:order-2">
+<img class="w-full h-full object-cover" data-alt="Doctor in white coat holding a professional digital tablet showing medical data in a bright clinic setting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuA-70b99lPjcphfRS1twV_qZaWhAZKCmZMlaQeYBEnbQxr0c971twok1L3hg4rNHn3QIA4kH048IuGe58CEEW3gX85U4nLz-6MDiMDxPrb8Jd_SPExyuDR9o6diLEVOeM_uch8BgIVFkyk1l1BWUK0UWO1oAKbP-ZIt1LlDFj4N8oSv0LcSNz53t420hG1ycCJT5V0VK8Ta-3kmMf0Ey7nPFl24VCXL7KPbwNXnPDJXhrKoozWj9eUPofhAB_tV9zybkFZkoBinlzHc"/>
+</div>
+</div>
+<!-- Standard Card 1 -->
+<div class="bg-surface-container-lowest rounded-lg p-8 shadow-sm flex flex-col">
+<div class="w-full h-48 mb-6 rounded-lg overflow-hidden bg-surface-container-low">
+<img class="w-full h-full object-cover" data-alt="Pediatrician gently examining a smiling child in a warm colorful medical room with natural lighting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuD2cYTaN5nANF0qhTAj_RerMgExgj2WuZ1XXmOc55NldLLnQXfjrjUyxh0_eDZZwzdJQO0fFsPrhA5__xx6kfU8iBXE5qH6ymuLMbtvVZ_vsJRFvEJ3YdG53lAv8bUAssyCYm6vuC-xJt_-5FCt4wCyg1EZWCpf9V4-NQs_CJP1lExxpi8NwQiQZQ0CJqqmlR5uiiRUWU4PqgHHw3UTv13gP--WFVtdhy0Tc92OOQtoomUBIBhLDSqlPTHHyIshPzpNvoM3JJAQi5u0"/>
+</div>
+<h3 class="text-xl font-bold tracking-tight mb-2 text-on-surface">Pediatric Wellness</h3>
+<p class="text-on-surface-variant mb-6 text-sm flex-grow">Gentle, expert care designed for our youngest patients, focusing on growth milestones and preventative health.</p>
+<button class="text-primary font-bold text-sm uppercase tracking-widest hover:underline decoration-2 underline-offset-4">Learn More</button>
+</div>
+<!-- Standard Card 2 -->
+<div class="bg-surface-container-lowest rounded-lg p-8 shadow-sm flex flex-col">
+<div class="w-full h-48 mb-6 rounded-lg overflow-hidden bg-surface-container-low">
+<img class="w-full h-full object-cover" data-alt="Macro shot of clinical laboratory tools and high-end glass vials on a clean white surface" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBSpLXX4ck2jcwVmlmJhWz8vNN-cDFgDJ_hGFEuCel0Iv866vCOc1QXhVhJ8zo2guSktcEIO2bYNYWyuAn2cJbu8zTbPn6awxKCWBXYvT-6TzLvt9LPCdlHcNX4QjoG2BS3VaxMQEpoh3RtZkEc5K5q8QT1StNNN811LGOLI3RAzOz0kbBwWbQOx2b-ey4nkHkn0jTnkFxCdLuhBez-XMX16j9f1gccLYFi3LkefSjV7n6ovtYIQpg4tRkEjm5p_yH61NaLhrefLMuB"/>
+</div>
+<h3 class="text-xl font-bold tracking-tight mb-2 text-on-surface">Diagnostic Lab Suite</h3>
+<p class="text-on-surface-variant mb-6 text-sm flex-grow">Full-spectrum pathology and laboratory services providing rapid, accurate results for peace of mind.</p>
+<button class="text-primary font-bold text-sm uppercase tracking-widest hover:underline decoration-2 underline-offset-4">Learn More</button>
+</div>
+<!-- Standard Card 3 -->
+<div class="bg-surface-container-lowest rounded-lg p-8 shadow-sm flex flex-col">
+<div class="w-full h-48 mb-6 rounded-lg overflow-hidden bg-surface-container-low">
+<img class="w-full h-full object-cover" data-alt="Serene medical spa environment with white towels and soft lighting for dermatological treatments" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDWV9gezmVZHpq00QwW051b3PyndgITZ5CC5ibsvquJVOMGka2ykmQZWfyNpSwDx1XNOWKXOTkv76l3TZt3evKIa3ajDZW1SqoIONW6kbaXOkqK5LPIHu071KEYGq8Ev_n1uCElPW_ERjtR6HUsZNi3iSwd2YjRNdYp7xG6NbQGMQAcS0_yY1mJOZM5jGIK_1IPOAoQGf6mRGqj5bNp6wIpJb2TZ5Ucgpn00UbJdXYDikGtVtbMm6w-hvjUxqyP4eUfAYDTb9dbq0Am"/>
+</div>
+<h3 class="text-xl font-bold tracking-tight mb-2 text-on-surface">Dermatology Atelier</h3>
+<p class="text-on-surface-variant mb-6 text-sm flex-grow">Advanced skin health treatments combining clinical dermatology with aesthetic wellness approaches.</p>
+<button class="text-primary font-bold text-sm uppercase tracking-widest hover:underline decoration-2 underline-offset-4">Learn More</button>
+</div>
+<!-- Standard Card 4 -->
+<div class="bg-surface-container-lowest rounded-lg p-8 shadow-sm flex flex-col">
+<div class="w-full h-48 mb-6 rounded-lg overflow-hidden bg-surface-container-low">
+<img class="w-full h-full object-cover" data-alt="Doctor's hands holding a stethoscope over a clinical desk with medical journals" src="https://lh3.googleusercontent.com/aida-public/AB6AXuB5uUh7SLrF_7aVppR58I8Of3PN9Aoo8EH6XXgaAJBhPLGu_Lp6rZXr4szUUA8UfsepCb_ylO5wRDHoTMzGpZF0YfyUkqmPOjJztdDOdRnnoHYmWQoVK8p50h9k-xhAEU5M5t7Ookb3nEp0yv2MZQec6WWbJnFMyM-edbYMDMoj17Ihw9VKbviED5K1qDZPNGosKz8VHEtkzUwclCT1lTErWHg61VcPH2uJuDN0lj8i7GxqCbHAYtEml7Yzqt3StSQdfg1fSNM0q7s1"/>
+</div>
+<h3 class="text-xl font-bold tracking-tight mb-2 text-on-surface">General Practice</h3>
+<p class="text-on-surface-variant mb-6 text-sm flex-grow">Day-to-day healthcare management, chronic condition support, and vaccinations for adults.</p>
+<button class="text-primary font-bold text-sm uppercase tracking-widest hover:underline decoration-2 underline-offset-4">Learn More</button>
+</div>
+</section>
+</main>
+<!-- BottomNavBar (Mobile) -->
+<nav class="lg:hidden fixed bottom-0 left-0 w-full flex justify-around items-center h-16 pb-safe px-4 bg-white/90 backdrop-blur-2xl shadow-[0_-4px_20px_rgba(0,0,0,0.05)] z-50">
+<a class="flex flex-col items-center justify-center text-slate-400" href="index.html">
+<span class="material-symbols-outlined">home</span>
+<span class="text-[10px] uppercase tracking-widest font-bold">Home</span>
+</a>
+<a class="flex flex-col items-center justify-center text-red-700 pb-1" href="services.html">
+<span class="material-symbols-outlined">stethoscope</span>
+<span class="text-[10px] uppercase tracking-widest font-bold">Services</span>
+</a>
+<a class="flex flex-col items-center justify-center text-slate-400" href="booking.html">
+<span class="material-symbols-outlined">calendar_today</span>
+<span class="text-[10px] uppercase tracking-widest font-bold">Book</span>
+</a>
+<a class="flex flex-col items-center justify-center text-slate-400" href="index.html#contact">
+<span class="material-symbols-outlined">call</span>
+<span class="text-[10px] uppercase tracking-widest font-bold">Contact</span>
+</a>
+</nav>
+<!-- Footer -->
+<footer class="bg-slate-100 w-full pt-24 pb-12">
+<div class="max-w-[1440px] mx-auto px-6 lg:px-12 grid grid-cols-1 md:grid-cols-4 gap-12">
+<div class="col-span-1 md:col-span-1">
+<h4 class="text-sm font-bold text-slate-900 mb-6 uppercase tracking-widest">SLV CLINIC</h4>
+<p class="text-xs text-slate-500 leading-relaxed max-w-[200px]">Redefining the medical experience through clinical excellence and aesthetic precision.</p>
+</div>
+<div>
+<h4 class="text-xs font-bold text-slate-900 mb-6 uppercase tracking-[0.1em]">Patients</h4>
+<ul class="space-y-4">
+<li><a class="text-xs text-slate-500 hover:text-red-700 transition-colors" href="#">Patient Portal</a></li>
+<li><a class="text-xs text-slate-500 hover:text-red-700 transition-colors" href="booking.html">Book Consultation</a></li>
+<li><a class="text-xs text-slate-500 hover:text-red-700 transition-colors" href="#">Pricing Guide</a></li>
+</ul>
+</div>
+<div>
+<h4 class="text-xs font-bold text-slate-900 mb-6 uppercase tracking-[0.1em]">Clinic</h4>
+<ul class="space-y-4">
+<li><a class="text-xs text-slate-500 hover:text-red-700 transition-colors" href="index.html#about">About Us</a></li>
+<li><a class="text-xs text-slate-500 hover:text-red-700 transition-colors" href="#">Careers</a></li>
+<li><a class="text-xs text-slate-500 hover:text-red-700 transition-colors" href="index.html#contact">Contact</a></li>
+</ul>
+</div>
+<div>
+<h4 class="text-xs font-bold text-slate-900 mb-6 uppercase tracking-[0.1em]">Contact</h4>
+<ul class="space-y-4">
+<li class="flex gap-3 items-start">
+<span class="material-symbols-outlined text-slate-400 text-sm" data-icon="location_on">location_on</span>
+<p class="text-xs text-slate-500 leading-relaxed">No. 12, 1st Main Road, Vasanth Nagar, Bangalore - 560052, Karnataka, India</p>
+</li>
+<li class="flex gap-3 items-center">
+<span class="material-symbols-outlined text-slate-400 text-sm" data-icon="call">call</span>
+<a class="text-xs text-slate-500 hover:text-red-700 transition-colors" href="tel:+918022261234">+91 80 2226 1234</a>
+</li>
+<li class="flex gap-3 items-center">
+<span class="material-symbols-outlined text-slate-400 text-sm" data-icon="mail">mail</span>
+<a class="text-xs text-slate-500 hover:text-red-700 transition-colors" href="mailto:info@slvclinic.com">info@slvclinic.com</a>
+</li>
+</ul>
+<div class="flex gap-4 mt-6">
+<span class="material-symbols-outlined text-slate-400 hover:text-primary cursor-pointer" data-icon="share">share</span>
+<span class="material-symbols-outlined text-slate-400 hover:text-primary cursor-pointer" data-icon="public">public</span>
+</div>
+</div>
+</div>
+<div class="max-w-[1440px] mx-auto px-6 lg:px-12 mt-20 pt-8 border-t border-slate-200/50 flex flex-col md:flex-row justify-between items-center gap-4">
+<p class="text-xs text-slate-500">© 2024 SLV Clinic. Editorial Medical Excellence.</p>
+<div class="flex gap-8">
+<a class="text-xs text-slate-500 hover:text-red-700" href="#">Privacy Policy</a>
+<a class="text-xs text-slate-500 hover:text-red-700" href="#">Terms of Service</a>
+<a class="text-xs text-slate-500 hover:text-red-700" href="#">Support</a>
+</div>
+</div>
+</footer>
+<script>
+const menuBtn = document.getElementById('menuBtn');
+const closeMenu = document.getElementById('closeMenu');
+const overlay = document.getElementById('mobileOverlay');
+const drawer = document.getElementById('mobileDrawer');
+function openMenu() { overlay.classList.add('active'); drawer.classList.add('active'); }
+function closeMenuFn() { overlay.classList.remove('active'); drawer.classList.remove('active'); }
+menuBtn.addEventListener('click', openMenu);
+closeMenu.addEventListener('click', closeMenuFn);
+overlay.addEventListener('click', closeMenuFn);
+</script>
+</body></html>
